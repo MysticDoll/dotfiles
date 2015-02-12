@@ -11,8 +11,8 @@ if has('vim_starting')
 endif
 
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'vimproc'
-NeoBundle 'VimClojure'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'vim-scripts/VimClojure'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplcache'
@@ -34,6 +34,7 @@ syntax on
 "endif       
 "------------------------------------------------------------------------------
 
+colorscheme elflord
 autocmd FileType javascript setl autoindent
 autocmd FileType javascript setl smartindent
 autocmd FileType javascript setl tabstop=8 expandtab shiftwidth=2 softtabstop=2
@@ -79,4 +80,4 @@ let g:indent_guides_space_guides=1
 hi IndentGuidesOdd ctermbg=235
 hi IndentGuidesEven ctermbg=237
 au FileType coffee,ruby,javascript,python IndentGuidesEnable
-nmpa <silent><Leader>ig <Plug>IndentGuidesToggle
+nmap <silent><Leader>ig <Plug>IndentGuidesToggle
