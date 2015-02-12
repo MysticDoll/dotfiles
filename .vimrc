@@ -50,3 +50,33 @@ let g:SimpleJsIndenter_briefMode = 2
 " switchのインデントを多少まともに
 let g:SimpleJsIndenter_CaseIndentLevel = -1
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'kchcmck/vim-coffee-script'
+NeoBundle 'claco/jasmine.vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+autocmd FileType coffee   setlocal sw=1 sts=2 ts=2 et
+
+autocmd BufWritePOst *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+
+function! JasmineSetting()
+  au BufRead,BufNewFile *Helper.js*Spec.js set filetype=jasmine.javascript
+  au BufRead,BufNewFile *Helper/coffee,*Spec.coffee set filetype=jasmine.coffee
+  au BufRead,BufNewFile,BufReadPre *Helper.coffee,*Spec.coffee let b:quickrun_config = {'type' : 'coffee'}
+  call jasmine#load_snippets()
+  map <buffer> <leader>m :JasmineRedGreen<CR>
+  command! JasmineRedGreen :call jasmine#redgreen()
+  command! JasmineMake :call jasmine#make()
+endfunction
+au BufRead,BufNewFile,BufReadPre *.coffee,*.js call JasmineSetting()
+
+let g:indent_guides_start_level=2
+let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup=0
+let g:indent_guides_color_change_percent=20
+let g:indent_guides_guide_size=1
+let g:indent_guides_space_guides=1
+
+hi IndentGuidesOdd ctermbg=235
+hi IndentGuidesEven ctermbg=237
+au FileType coffee,ruby,javascript,python IndentGuidesEnable
+nmpa <silent><Leader>ig <Plug>IndentGuidesToggle
